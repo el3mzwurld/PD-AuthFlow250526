@@ -1,0 +1,12 @@
+.form-side {
+  &::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 0px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.09);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #4c4ffe6f;
+  }
+}
