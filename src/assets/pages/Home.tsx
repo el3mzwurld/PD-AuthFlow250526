@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { useEffect, useState, useRef } from "react";
+import { animate, motion } from "motion/react";
 // images and icons
 import logo from "../images/logo.svg";
 import { MdOutlineEdit } from "react-icons/md";
@@ -15,11 +15,61 @@ import { CiWarning } from "react-icons/ci";
 //data imports
 import CardStorage from "../data/cardData.json";
 import "../styles/global.css";
+// components
+import StatCard from "../components/StatCard";
+import { AppTrafficGraph, TransferTrackGraph } from "../components/Graphs";
+import StatusCard from "../components/StatusCard";
 // interfaces
 interface LocationState {
   email: string;
   name: string;
 }
+
+interface AppStatus {
+  title: string;
+  uptime: number;
+  responseTime: number;
+  status: {
+    error?: boolean;
+    clean?: boolean;
+    warning?: boolean;
+  };
+}
+
+const AppStatusStats: AppStatus[] = [
+  {
+    title: "Database Service",
+    uptime: 99,
+    responseTime: 30,
+    status: {
+      error: true,
+    },
+  },
+  {
+    title: "API Gateway",
+    uptime: 99.5,
+    responseTime: 45,
+    status: {
+      clean: true,
+    },
+  },
+  {
+    title: "Cache Service",
+    uptime: 98.9,
+    responseTime: 15,
+    status: {
+      warning: true,
+    },
+  },
+  {
+    title: "Auth Service",
+    uptime: 99.9,
+    responseTime: 60,
+    status: {
+      clean: true,
+    },
+  },
+];
 
 const Home = () => {
   // States
@@ -63,16 +113,170 @@ const Home = () => {
           width: "100%",
           height: "100vh",
           backgroundColor: "background.authSide",
+          overflowX: "hidden",
         }}
       >
         {/* nav bar */}
-        <header>
+        <header style={{ position: "sticky" }}>
           <NavBar email={email} name={name} windowWidth={windowWidth} />
         </header>
 
         {/* main content */}
-        {/* 1. Graphs and stats */}
-        {/* App status component */}
+        <Box
+          component={motion.main}
+          animate={{ opacity: [0, 0, 1], y: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          sx={{
+            height: "auto",
+            width: "100%",
+            p: 2.5,
+            px: 3,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2.5,
+            overflow: "hidden",
+            overflowY: "auto",
+            backgroundColor: "background.authSide",
+            fontFamily: theme.typography.altFont,
+          }}
+        >
+          {/* 1. Graphs and stats */}
+          <Stack
+            direction={"row"}
+            component={motion.section}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 0.25 }}
+            sx={{
+              width: "100%",
+              height: "auto",
+              alignItems: "center",
+              justifyContent: "space-between",
+              px: 2.5,
+            }}
+            spacing={{ xs: 2, lg: 5 }}
+          >
+            {CardArray.map((card, index) => (
+              <StatCard
+                key={index}
+                title={card.title}
+                icon={card.icon}
+                stat={card.stat}
+                negative={card.negative}
+                caption={card.caption}
+              />
+            ))}
+          </Stack>
+
+          <Stack
+            direction={"row"}
+            sx={{
+              width: "100%",
+              height: "350px",
+              alignItems: "center",
+              justifyContent: "space-between",
+              py: 1.5,
+              px: 2.5,
+            }}
+          >
+            <Stack
+              sx={{
+                alignItems: "start",
+                color: "text.primary",
+                height: "100%",
+                width: "49%",
+                border: "1px solid",
+                borderColor: "divider",
+                py: 1.2,
+                pt: 2,
+                px: 1.7,
+                backgroundColor: "background.default",
+                borderRadius: 2.5,
+                justifyContent: "space-between",
+                gap: 2.5,
+              }}
+            >
+              <Typography variant="h4">Application Traffic (24h)</Typography>
+              <Box
+                sx={{
+                  flex: 1,
+                  display: "flex",
+                  width: "100%",
+                  height: "75%",
+                  alignItems: "center",
+                  justifyContent: "start",
+                }}
+              >
+                <AppTrafficGraph />
+              </Box>
+            </Stack>
+            <Stack
+              sx={{
+                alignItems: "start",
+                color: "text.primary",
+                height: "100%",
+                width: "49%",
+                border: "1px solid",
+                borderColor: "divider",
+                py: 1.2,
+                pt: 2,
+                px: 1.7,
+                backgroundColor: "background.default",
+                borderRadius: 2.5,
+              }}
+            >
+              <Typography variant="h4">Transaction Status (24h)</Typography>
+              <Box
+                sx={{
+                  flex: 1,
+                  display: "flex",
+                  width: "100%",
+                  height: "75%",
+                  alignItems: "center",
+                  justifyContent: "start",
+                }}
+              >
+                <TransferTrackGraph />
+              </Box>
+            </Stack>
+          </Stack>
+
+          {/* App status component */}
+          <section style={{ width: "100%", padding: 16 }}>
+            <Stack
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: [9, 0] }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              sx={{
+                width: "100%",
+                height: "auto",
+                maxHeight: "400px",
+                overflowY: "auto",
+                py: 2.5,
+                backgroundColor: "background.default",
+                border: "1px solid",
+                borderColor: "divider",
+                px: 1.8,
+                borderRadius: 2.5,
+                alignItems: "start",
+              }}
+              spacing={2}
+            >
+              <Typography variant="h4">Application Services Status</Typography>
+              {AppStatusStats.map((statusCard, index) => (
+                <StatusCard
+                  title={statusCard.title}
+                  uptime={statusCard.uptime}
+                  responseTime={statusCard.responseTime}
+                  status={statusCard.status}
+                  key={index}
+                />
+              ))}
+            </Stack>
+          </section>
+        </Box>
       </Box>
     </>
   );
@@ -85,6 +289,7 @@ interface NavProps {
 }
 
 const NavBar = ({ email, name, windowWidth }: NavProps) => {
+  // for later
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const handleToggleSidebar = () => {
     setSideBarOpen((prev) => !prev);

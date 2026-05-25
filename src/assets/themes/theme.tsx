@@ -35,7 +35,13 @@ const theme = createTheme({
     },
     success: {
       main: "#72A284",
-      contrastText: "#ffffff",
+      contrastText: "#282f27",
+    },
+    warning: {
+      main: "#F59E0B",
+      light: "#FBBF24",
+      dark: "#D97706",
+      contrastText: "#201f18",
     },
     divider: "#bfc6d4",
   },
@@ -64,7 +70,7 @@ const theme = createTheme({
       sm: 600,
       md: 900,
       lg: 1024,
-      xl: 1500,
+      xl: 1440,
     },
   },
   components: {
