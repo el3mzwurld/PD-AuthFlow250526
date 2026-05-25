@@ -62,12 +62,6 @@ const SignUp = () => {
       setStatus: (status: string | null) => void;
     },
   ) => {
-    // check if localstorage is empty, if so, throw Error and throw error to sign up first
-    if (localStorage.length === 0) {
-      setStatus("Please sign up first to log in.");
-      console.log("LocalStorage is empty:", localStorage);
-      return;
-    }
     // check if the email exists in localstorage, if yes, Error : user exists
     if (localStorage.getItem(values.email) !== null) {
       setFieldError(
@@ -89,7 +83,7 @@ const SignUp = () => {
     localStorage.setItem(values.email, JSON.stringify(userData));
     console.log("User registered succesfully", values.email);
     setStatus(null);
-    navigate("/");
+    handleLandingPageRedirect();
   };
 
   const errorStyles = {

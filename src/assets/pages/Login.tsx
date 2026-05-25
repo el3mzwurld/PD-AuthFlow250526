@@ -49,7 +49,7 @@ const Login = () => {
   ) => {
     // check if localstorage is empty, if so, throw Error and throw error to sign up first
     if (localStorage.length === 0) {
-      setStatus("Please sign up first to log in.");
+      setFieldError("password", "Please sign up first to log in.");
       console.log("LocalStorage is empty:", localStorage);
       return;
     }
