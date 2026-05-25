@@ -36,12 +36,15 @@ export const registerValidator = Yup.object({
 
   homeAddress: Yup.string().required("Please enter your home address"),
 });
-export const forgotPassword = Yup.object();
-
-// First name (no submission if fname and lname are empty)
-// Last name
-// Phone (only digits)
-// Email (must meet basic email standards)
-// Home address
-// Password
-// Confirm password
+export const forgotPassword = Yup.object({
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .matches(
+      passwordRegex,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    )
+    .required("Please enter your password"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .required("Please confirm your password"),
+});

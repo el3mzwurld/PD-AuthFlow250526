@@ -322,11 +322,6 @@ const SignUp = () => {
                     >
                       Password
                     </Typography>
-                    <ErrorMessage
-                      name="password"
-                      component={"p"}
-                      style={{ fontSize: "12px", color: "red", opacity: 0.5 }}
-                    />
                   </label>
 
                   <Box sx={{ position: "relative", width: "100%" }}>
@@ -370,23 +365,6 @@ const SignUp = () => {
                       placeholder="Confirm your password"
                       style={{ ...formFieldStyles }}
                     />
-                    <span
-                      style={{
-                        position: "absolute",
-                        right: 10,
-                        opacity: 0.6,
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        cursor: "pointer",
-                      }}
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? (
-                        <FaRegEyeSlash size={16} />
-                      ) : (
-                        <FaRegEye size={16} />
-                      )}
-                    </span>
                   </Box>
                   <ErrorMessage
                     name="confirmPassword"

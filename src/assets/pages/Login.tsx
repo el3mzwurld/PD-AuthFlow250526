@@ -225,11 +225,6 @@ const Login = () => {
                   >
                     Password
                   </Typography>
-                  <ErrorMessage
-                    name="password"
-                    component={"p"}
-                    style={{ fontSize: "12px", color: "red", opacity: 0.5 }}
-                  />
                 </label>
 
                 <Box sx={{ position: "relative", width: "100%" }}>
