@@ -13,6 +13,10 @@ const theme = createTheme({
       main: "#F5F5f5",
       contrastText: "#1a1a1a",
     },
+    darkMode: {
+      main: "#1a1a1a",
+      contrastText: "#4C4FFE",
+    },
     background: {
       default: "#f8f9f8",
       paper: "#ffffff",

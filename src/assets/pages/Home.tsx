@@ -9,7 +9,13 @@ import { MdOutlineEdit } from "react-icons/md";
 import { MdNotificationsNone } from "react-icons/md";
 import { MdOutlineSend } from "react-icons/md";
 import { HiOutlineUser } from "react-icons/hi";
-//
+import { AiFillDatabase } from "react-icons/ai";
+import { CiClock2 } from "react-icons/ci";
+import { CiWarning } from "react-icons/ci";
+//data imports
+import CardStorage from "../data/cardData.json";
+import "../styles/global.css";
+// interfaces
 interface LocationState {
   email: string;
   name: string;
@@ -20,6 +26,23 @@ const Home = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const theme = useTheme();
+
+  const IconArr = [
+    AiFillDatabase,
+    CiClock2,
+    MdOutlineSend,
+    CiWarning,
+  ] as (typeof MdOutlineEdit)[];
+
+  const CardArray = [] as typeof CardStorage;
+
+  CardStorage.forEach((object) => CardArray.push(object));
+
+  CardArray.forEach((card, index) => {
+    Object.defineProperty(card, "icon", {
+      value: IconArr[index],
+    });
+  });
 
   const Location = useLocation();
   const { email, name } = Location.state as LocationState;
@@ -62,6 +85,10 @@ interface NavProps {
 }
 
 const NavBar = ({ email, name, windowWidth }: NavProps) => {
+  const [sideBarOpen, setSideBarOpen] = useState(false);
+  const handleToggleSidebar = () => {
+    setSideBarOpen((prev) => !prev);
+  };
   return (
     <>
       <Box
@@ -75,6 +102,7 @@ const NavBar = ({ email, name, windowWidth }: NavProps) => {
           alignItems: "center",
           justifyContent: "space-between",
           gap: 2,
+          position: "relative",
         }}
       >
         {/* logo */}
@@ -86,10 +114,11 @@ const NavBar = ({ email, name, windowWidth }: NavProps) => {
           direction="row"
           sx={{
             height: "100%",
-            width: "25%",
+            width: { xs: "40%", md: "25%" },
             alignItems: "center",
             justifyContent: "flex-start",
           }}
+          className="logo"
           spacing={2}
         >
           <img src={logo} style={{ width: "40px", height: "auto" }} alt="" />
@@ -108,7 +137,15 @@ const NavBar = ({ email, name, windowWidth }: NavProps) => {
         </Stack>
 
         {/* controls */}
-        <Controls />
+        {windowWidth < 768 ? (
+          <MobControls
+            open={sideBarOpen}
+            setIsOpen={setSideBarOpen}
+            toggleOpen={handleToggleSidebar}
+          />
+        ) : (
+          <Controls />
+        )}
         {/* condition ? check if windowWidth is below desktop reqs, if yes..display hamburger menu */}
 
         {/* Welcome message */}
@@ -217,6 +254,17 @@ const Controls = () => {
         </Stack>
       </motion.ul>
     </Stack>
+  );
+};
+
+interface SideBarProps {
+  open: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleOpen: () => void;
+}
+const MobControls = ({ open }: SideBarProps) => {
+  return (
+    <Box sx={{ position: "absolute", display: open ? "flex" : "none" }}></Box>
   );
 };
 export default Home;

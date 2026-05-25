@@ -3,7 +3,7 @@ import Login from "./assets/pages/Login";
 import SignUp from "./assets/pages/SignUp";
 import Home from "./assets/pages/Home";
 import PasswordReset from "./assets/pages/PasswordReset";
-import "./assets/styles/global.css";
+
 function App() {
   return (
     <>
