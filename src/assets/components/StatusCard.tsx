@@ -24,7 +24,7 @@ const StatusCard = ({
     <Box
       component={motion.div}
       animate={{ opacity: [0, 0.8, 1] }}
-      transition={{ duration: 0.5, ease: "ease-out" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       sx={{
         width: "100%",
         display: "flex",
