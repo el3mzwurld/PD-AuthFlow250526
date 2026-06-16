@@ -15,6 +15,14 @@ declare module "@mui/material/styles" {
     altFont: string;
   }
 
+  interface TypographyOptions {
+    altFont?: string;
+  }
+
+  interface TypographyVariantsOptions {
+    altFont?: string;
+  }
+
   // Augment the palette interface
   interface Palette {
     light: string;

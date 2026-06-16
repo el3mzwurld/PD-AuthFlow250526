@@ -8,13 +8,11 @@ import {
   BarChart,
   Bar,
 } from "recharts";
-import { useTheme } from "@emotion/react";
 // data
 import { appTraffic, transferData } from "../data/graph";
 
 const AppTrafficGraph = () => {
   const data = appTraffic;
-  const theme = useTheme();
   return (
     <AreaChart
       width={"95%"}
@@ -37,8 +35,8 @@ const AppTrafficGraph = () => {
       <Area
         type={"monotone"}
         dataKey={"traffic"}
-        stroke={theme.palette.primary.dark}
-        fill={theme.palette.primary.light}
+        stroke={"#6a64da"}
+        fill={"#26418F"}
         fillOpacity={0.6}
       />
     </AreaChart>

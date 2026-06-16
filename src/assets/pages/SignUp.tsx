@@ -1,23 +1,17 @@
 // images and icons
 import logo from "../images/logo.svg";
-import googleIcon from "../images/google.png";
 import loginIllustration from "../images/signup illustration.svg";
 import logoAlt from "../images/logoipsum-custom-logo.svg";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 // components and libraries
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import {
-  loginValidator,
-  registerValidator,
-} from "../form-validation/validation.all";
-import { span } from "motion/react-client";
+import { registerValidator } from "../form-validation/validation.all";
 const initialValues = {
   email: "",
   password: "",
@@ -225,14 +219,15 @@ const SignUp = () => {
                       name="fName"
                       type="text"
                     />
-                    <ErrorMessage
-                      name="fName"
+                    <Box
                       component={"p"}
-                      style={{
+                      sx={{
                         fontSize: "12px",
                         color: theme.palette.error.light,
                       }}
-                    />
+                    >
+                      <ErrorMessage name="fName" />
+                    </Box>
                   </Stack>
                   <Stack spacing={1}>
                     <label htmlFor="lName">Last Name</label>
@@ -241,14 +236,15 @@ const SignUp = () => {
                       name="lName"
                       type="text"
                     />
-                    <ErrorMessage
-                      name="lName"
+                    <Box
                       component={"p"}
-                      style={{
+                      sx={{
                         fontSize: "12px",
                         color: theme.palette.error.light,
                       }}
-                    />
+                    >
+                      <ErrorMessage name="lName" />
+                    </Box>
                   </Stack>
                 </Stack>
 
@@ -259,14 +255,15 @@ const SignUp = () => {
                     name="email"
                     type="email"
                   />
-                  <ErrorMessage
-                    name="email"
+                  <Box
                     component={"p"}
-                    style={{
+                    sx={{
                       fontSize: "12px",
                       color: theme.palette.error.light,
                     }}
-                  />
+                  >
+                    <ErrorMessage name="email" component={"p"} />
+                  </Box>
                 </Stack>
                 <Stack spacing={1}>
                   <label htmlFor="phone">Phone</label>
@@ -275,14 +272,15 @@ const SignUp = () => {
                     name="phone"
                     type="phone"
                   />
-                  <ErrorMessage
-                    name="phone"
+                  <Box
                     component={"p"}
-                    style={{
+                    sx={{
                       fontSize: "12px",
                       color: theme.palette.error.light,
                     }}
-                  />
+                  >
+                    <ErrorMessage name="phone" />
+                  </Box>
                 </Stack>
                 <Stack spacing={1}>
                   <label htmlFor="homeAddress">Home Address</label>
@@ -291,14 +289,15 @@ const SignUp = () => {
                     name="homeAddress"
                     type="text"
                   />
-                  <ErrorMessage
-                    name="homeAddress"
+                  <Box
                     component={"p"}
-                    style={{
+                    sx={{
                       fontSize: "12px",
                       color: theme.palette.error.light,
                     }}
-                  />
+                  >
+                    <ErrorMessage name="homeAddress" />
+                  </Box>
                 </Stack>
                 <Stack spacing={0.5}>
                   <label htmlFor="password">
@@ -340,11 +339,15 @@ const SignUp = () => {
                     </span>
                   </Box>
 
-                  <ErrorMessage
-                    name="password"
+                  <Box
                     component={"p"}
-                    style={{ fontSize: "12px", color: "red", opacity: 0.5 }}
-                  />
+                    sx={{
+                      fontSize: "12px",
+                      color: theme.palette.error.light,
+                    }}
+                  >
+                    <ErrorMessage name="password" />
+                  </Box>
                 </Stack>
                 <Stack spacing={1}>
                   <label htmlFor="confirmPassword">Confirm Password</label>
@@ -356,14 +359,15 @@ const SignUp = () => {
                       style={{ ...formFieldStyles }}
                     />
                   </Box>
-                  <ErrorMessage
-                    name="confirmPassword"
+                  <Box
                     component={"p"}
-                    style={{
+                    sx={{
                       fontSize: "12px",
                       color: theme.palette.error.light,
                     }}
-                  />
+                  >
+                    <ErrorMessage name="confirmPassword" />
+                  </Box>
                 </Stack>
                 <Button
                   type="submit"
