@@ -86,10 +86,6 @@ const SignUp = () => {
     handleLandingPageRedirect();
   };
 
-  const errorStyles = {
-    fontSize: "12px",
-    color: theme.palette.error.light,
-  };
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };

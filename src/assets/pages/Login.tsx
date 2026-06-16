@@ -1,12 +1,11 @@
 // images and icons
 import logo from "../images/logo.svg";
-import googleIcon from "../images/google.png";
 import loginIllustration from "../images/Login-Illustration.svg";
 import logoAlt from "../images/logoipsum-custom-logo.svg";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 // components and libraries
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
@@ -14,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { loginValidator } from "../form-validation/validation.all";
-import { span } from "motion/react-client";
 const initialValues = {
   email: "",
   password: "",
@@ -49,8 +47,8 @@ const Login = () => {
   ) => {
     // check if localstorage is empty, if so, throw Error and throw error to sign up first
     if (localStorage.length === 0) {
-      setFieldError("password", "Please sign up first to log in.");
-      console.log("LocalStorage is empty:", localStorage);
+      setFieldError("email", "Please sign up first to log in.");
+      console.error("LocalStorage is empty:", localStorage);
       return;
     }
     // if it isn't empty, check if the email exists
@@ -159,8 +157,8 @@ const Login = () => {
             Welcome Back
           </Typography>
         </Stack>
-        {/* Form */}
 
+        {/* Form */}
         <Box
           sx={{
             width: { xs: "75%", lg: "300px" },
@@ -207,11 +205,7 @@ const Login = () => {
                   placeholder="Email"
                   style={formFieldStyles}
                 ></Field>
-                <ErrorMessage
-                  name="email"
-                  component={"p"}
-                  style={{ fontSize: "12px", color: "red", opacity: 0.5 }}
-                />
+                <ErrorMessage name="email" component={"p"} />
               </Stack>
               <Stack spacing={0.5}>
                 <label htmlFor="password">
@@ -253,11 +247,7 @@ const Login = () => {
                   </span>
                 </Box>
 
-                <ErrorMessage
-                  name="password"
-                  component={"p"}
-                  style={{ fontSize: "12px", color: "red", opacity: 0.5 }}
-                />
+                <ErrorMessage name="password" component={"p"} />
               </Stack>
               <Stack
                 direction={"row"}

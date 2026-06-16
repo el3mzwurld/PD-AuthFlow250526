@@ -65,6 +65,7 @@ const TransferTrackGraph = () => {
       <CartesianGrid strokeDasharray={"3 3"} />
       <XAxis dataKey={"hour"} niceTicks="snap125" />
       <YAxis dataKey={"y"} width={"auto"} niceTicks="snap125" />
+      <Tooltip />
       <Bar
         type={"monotone"}
         dataKey={"y"}
