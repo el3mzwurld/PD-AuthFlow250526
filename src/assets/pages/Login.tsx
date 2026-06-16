@@ -205,7 +205,9 @@ const Login = () => {
                   placeholder="Email"
                   style={formFieldStyles}
                 ></Field>
-                <ErrorMessage name="email" component={"p"} />
+                <Box sx={{ color: "red", fontSize: "12px" }}>
+                  <ErrorMessage name="email" component={"p"} />
+                </Box>
               </Stack>
               <Stack spacing={0.5}>
                 <label htmlFor="password">
@@ -247,7 +249,9 @@ const Login = () => {
                   </span>
                 </Box>
 
-                <ErrorMessage name="password" component={"p"} />
+                <Box sx={{ color: "red", fontSize: "12px" }}>
+                  <ErrorMessage name="password" component={"p"} />
+                </Box>
               </Stack>
               <Stack
                 direction={"row"}
