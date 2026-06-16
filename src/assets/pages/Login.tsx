@@ -71,7 +71,7 @@ const Login = () => {
     }
 
     setStatus(null);
-    navigate("/dashboard", {
+    navigate("dashboard", {
       state: { email: values.email, name: storedUser.fName },
     });
   };
