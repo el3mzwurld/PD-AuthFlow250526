@@ -1,15 +1,13 @@
 // images and icons
 import logo from "../images/logo.svg";
-import googleIcon from "../images/google.png";
 import loginIllustration from "../images/Reset password-rafiki.svg";
 import logoAlt from "../images/logoipsum-custom-logo.svg";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 // components and libraries
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { AnimatePresence, motion } from "motion/react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -40,6 +38,7 @@ const PasswordReset = () => {
   };
 
   const checkUser = () => {
+    console.log(user);
     if (!email) {
       alert("Please provide an email address");
       return;
@@ -302,12 +301,12 @@ const PasswordReset = () => {
                           )}
                         </span>
                       </Box>
-
-                      <ErrorMessage
-                        name="password"
+                      <Box
                         component={"p"}
-                        style={{ fontSize: "12px", color: "red", opacity: 0.5 }}
-                      />
+                        sx={{ fontSize: "12px", color: "red", opacity: 0.5 }}
+                      >
+                        <ErrorMessage name="password" />
+                      </Box>
                     </Stack>
                     <Stack spacing={1}>
                       <label htmlFor="confirmPassword">Confirm Password</label>
@@ -336,14 +335,12 @@ const PasswordReset = () => {
                           )}
                         </span>
                       </Box>
-                      <ErrorMessage
-                        name="confirmPassword"
+                      <Box
                         component={"p"}
-                        style={{
-                          fontSize: "12px",
-                          color: theme.palette.error.light,
-                        }}
-                      />
+                        sx={{ fontSize: "12px", color: "red", opacity: 0.5 }}
+                      >
+                        <ErrorMessage name="confirmPassword" />
+                      </Box>
                     </Stack>
                     <Button
                       type="submit"
