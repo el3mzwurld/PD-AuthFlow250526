@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { IconType } from "react-icons";
 import { Box, Stack, Typography } from "@mui/material";
 // images and icons

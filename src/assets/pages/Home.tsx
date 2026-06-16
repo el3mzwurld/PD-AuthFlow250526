@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@mui/material";
-import { useEffect, useState, useRef } from "react";
-import { animate, motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 // images and icons
 import logo from "../images/logo.svg";
 import { MdOutlineEdit } from "react-icons/md";
@@ -13,7 +13,7 @@ import { AiFillDatabase } from "react-icons/ai";
 import { CiClock2 } from "react-icons/ci";
 import { CiWarning } from "react-icons/ci";
 //data imports
-import CardStorage from "../data/cardData.json";
+import { CardStorage } from "../data/cardData.ts";
 import "../styles/global.css";
 // components
 import StatCard from "../components/StatCard";
@@ -89,9 +89,7 @@ const Home = () => {
   CardStorage.forEach((object) => CardArray.push(object));
 
   CardArray.forEach((card, index) => {
-    Object.defineProperty(card, "icon", {
-      value: IconArr[index],
-    });
+    card.icon = IconArr[index];
   });
 
   const Location = useLocation();
@@ -288,12 +286,13 @@ interface NavProps {
   windowWidth: number;
 }
 
-const NavBar = ({ email, name, windowWidth }: NavProps) => {
+const NavBar = ({ name, windowWidth }: NavProps) => {
   // for later
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const handleToggleSidebar = () => {
     setSideBarOpen((prev) => !prev);
   };
+  const theme = useTheme();
   return (
     <>
       <Box
@@ -362,9 +361,9 @@ const NavBar = ({ email, name, windowWidth }: NavProps) => {
           <Typography
             component={motion.p}
             variant="h3"
+            style={{ color: theme.palette.text.disabled }}
             animate={{ opacity: [0, 1], x: [20, 0] }}
-            transition={{ duration: "0.7", ease: "easeInOut" }}
-            sx={{ color: "text.disabled" }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
           >
             {name}
           </Typography>
